@@ -2,10 +2,10 @@
 header("Content-Type: application/json");
 
 // Read JSON input
-$data = json_decode(file_get_contents(__DIR__ . "/php://input"), true);
+$data = json_decode(file_get_contents("php://input"), true);
 
 if (!$data) {
-    echo json_encode(["success" => false, "message" => "No login data received"]); 
+    echo json_encode(["success" => false, "message" => "No login data received"]);
     exit;
 }
 
@@ -18,7 +18,7 @@ $accounts = json_decode(file_get_contents(__DIR__ . "/accounts.json"), true);
 foreach ($accounts as $acc) {
     if ($acc["username"] === $username && $acc["password"] === $password) {
 
-        // 🔥 Lifetime account
+        // Lifetime account
         if ($acc["expires"] === 0 || strtolower($acc["expires"]) === "lifetime") {
             echo json_encode([
                 "success" => true,
@@ -28,11 +28,9 @@ foreach ($accounts as $acc) {
             exit;
         }
 
-        // Convert expiry to timestamp
         $expiryTime = strtotime($acc["expires"]);
         $currentTime = time();
 
-        // ❌ Expired
         if ($expiryTime < $currentTime) {
             echo json_encode([
                 "success" => false,
@@ -41,14 +39,12 @@ foreach ($accounts as $acc) {
             exit;
         }
 
-        // 🔥 Calculate remaining time
         $remaining = $expiryTime - $currentTime;
 
         $days = floor($remaining / 86400);
         $hours = floor(($remaining % 86400) / 3600);
         $minutes = floor(($remaining % 3600) / 60);
 
-        // Build string like "2D 3H 37M"
         $timeString = "";
         if ($days > 0) $timeString .= $days . "D ";
         if ($hours > 0) $timeString .= $hours . "H ";
@@ -63,7 +59,6 @@ foreach ($accounts as $acc) {
     }
 }
 
-// ❌ Invalid login
 echo json_encode([
     "success" => false,
     "message" => "Invalid login"
