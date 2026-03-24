@@ -1,0 +1,17 @@
+[
+  {
+    "username": "test",
+    "password": "123",
+    "expires": "2026-12-31"
+  },
+  {
+    "username": "expired",
+    "password": "123",
+    "expires": "2020-01-01"
+  },
+  {
+    "username": "lifetime",
+    "password": "123",
+    "expires": "Lifetime"
+  }
+]

@@ -1,0 +1,6 @@
+[
+    { "key": "ABC123-1DAY", "days": 1, "used": false },
+    { "key": "DEF456-7DAY", "days": 7, "used": false },
+    { "key": "GHI789-30DAY", "days": 30, "used": false },
+    { "key": "LIFETIME-KEY", "days": 9999, "used": false }
+]
