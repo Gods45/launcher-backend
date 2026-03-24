@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 
 // Read JSON input
-$data = json_decode(file_get_contents("php://input"), true);
+$data = json_decode(file_get_contents(__DIR__ . "/php://input"), true);
 
 if (!$data) {
     echo json_encode(["success" => false, "message" => "No login data received"]);
@@ -13,7 +13,7 @@ $username = $data["username"] ?? "";
 $password = $data["password"] ?? "";
 
 // Load accounts
-$accounts = json_decode(file_get_contents("accounts.json"), true);
+$accounts = json_decode(file_get_contents(__DIR__ . "/accounts.json"), true);
 
 foreach ($accounts as $acc) {
     if ($acc["username"] === $username && $acc["password"] === $password) {
