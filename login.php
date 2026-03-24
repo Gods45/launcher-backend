@@ -5,7 +5,7 @@ header("Content-Type: application/json");
 $data = json_decode(file_get_contents(__DIR__ . "/php://input"), true);
 
 if (!$data) {
-    echo json_encode(["success" => false, "message" => "No login data received"]);
+    echo json_encode(["success" => false, "message" => "No login data received"]); 
     exit;
 }
 
